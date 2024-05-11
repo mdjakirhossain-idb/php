@@ -19,7 +19,7 @@
         <div class="logo"><img src="Asset/image/logopic.png" alt=""></div>
         <ul class="menu">
             <li>
-                <a href="../..dashboard.php">
+                <a href="../../dashboard.php">
                     <i class="fa fa-dashboard"></i>
                     <span>Dashboard</span>
                 </a>
