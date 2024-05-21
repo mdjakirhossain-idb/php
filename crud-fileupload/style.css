@@ -1,0 +1,29 @@
+ table,th,td{
+    border: 1px solid #8a4a52;
+    border-collapse: collapse;
+    background-color:#adebc1;
+    
+  
+}
+th{
+   background-color: #a189ce;
+}
+.main{
+    background-color:#94c279;
+    width: 80%;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+h2{
+    text-align: center;
+    color: #ffffff;
+}
+table{
+    width: 100%;
+    text-align: center;
+}
+body{
+    
+    background-color: #49bba2;
+}
