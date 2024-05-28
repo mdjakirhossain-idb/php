@@ -1,39 +1,53 @@
-<?php include 'header.php'; ?>
-<div id="main-content">
-    <h2>Add New Record</h2>
-    <form class="post-form" action="savedata.php" method="post">
-        <div class="form-group">
-            <label>Name</label>
-            <input type="text" name="sname" />
-        </div>
-        <div class="form-group">
-            <label>Address</label>
-            <input type="text" name="saddress" />
-        </div>
-        <div class="form-group">
-            <label>Class</label>
-            
-            <select name="class">
-                <option value="" selected disabled>Select Class</option>
-                <?php
-                $conn = mysqli_connect("localhost", "root", "", "crud_php")or die("Connection Failed");
-                $sql= "SELECT * FROM studentclass";
-                $result = mysqli_query($conn, $sql)or die("Query Unsuccessfull");
-                
-                while($row=mysqli_fetch_assoc($result)){
-                ?>
-                <option value=<?php echo $row['cid'];?>><?php echo $row['cname'];?></option>
-                <?php } mysqli_close($conn);?>
-            </select>
-            
-        </div>
-        <div class="form-group">
-            <label>Phone</label>
-            <input type="text" name="sphone" />
-        </div>
-        <input class="submit" type="submit" value="Save"  />
-    </form>
-</div>
-</div>
-</body>
-</html>
+<?php
+  require_once('db.php');
+  $upload_dir = 'uploads/';
+
+  if (isset($_POST['Submit'])) {
+    $name = $_POST['name'];
+    $contact = $_POST['contact'];
+    $email = $_POST['email'];
+
+    $imgName = $_FILES['image']['name'];
+		$imgTmp = $_FILES['image']['tmp_name'];
+		$imgSize = $_FILES['image']['size'];
+
+    if(empty($name)){
+			$errorMsg = 'Please input name';
+		}elseif(empty($contact)){
+			$errorMsg = 'Please input contact';
+		}elseif(empty($email)){
+			$errorMsg = 'Please input email';
+		}else{
+
+			$imgExt = strtolower(pathinfo($imgName, PATHINFO_EXTENSION));
+
+			$allowExt  = array('jpeg', 'jpg', 'png', 'gif');
+
+			$userPic = time().'_'.rand(1000,9999).'.'.$imgExt;
+
+			if(in_array($imgExt, $allowExt)){
+
+				if($imgSize < 5000000){
+					move_uploaded_file($imgTmp ,$upload_dir.$userPic);
+				}else{
+					$errorMsg = 'Image too large';
+				}
+			}else{
+				$errorMsg = 'Please select a valid image';
+			}
+		}
+
+
+		if(!isset($errorMsg)){
+			$sql = "insert into contacts(name, contact, email, image)
+					values('".$name."', '".$contact."', '".$email."', '".$userPic."')";
+			$result = mysqli_query($conn, $sql);
+			if($result){
+				$successMsg = 'New record added successfully';
+				header('Location: index.php');
+			}else{
+				$errorMsg = 'Error '.mysqli_error($conn);
+			}
+		}
+  }
+?>

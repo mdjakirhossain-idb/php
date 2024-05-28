@@ -1,71 +1,6 @@
 <?php
-  require_once('db.php');
-  $upload_dir = 'uploads/';
-
-  if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $sql = "select * from contacts where id=".$id;
-    $result = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($result) > 0) {
-      $row = mysqli_fetch_assoc($result);
-    }else {
-      $errorMsg = 'Could not Find Any Record';
-    }
-  }
-
-  if(isset($_POST['Submit'])){
-		$name = $_POST['name'];
-    $contact = $_POST['contact'];
-		$email = $_POST['email'];
-
-		$imgName = $_FILES['image']['name'];
-		$imgTmp = $_FILES['image']['tmp_name'];
-		$imgSize = $_FILES['image']['size'];
-
-		if($imgName){
-
-			$imgExt = strtolower(pathinfo($imgName, PATHINFO_EXTENSION));
-
-			$allowExt  = array('jpeg', 'jpg', 'png', 'gif');
-
-			$userPic = time().'_'.rand(1000,9999).'.'.$imgExt;
-
-			if(in_array($imgExt, $allowExt)){
-
-				if($imgSize < 5000000){
-					unlink($upload_dir.$row['image']);
-					move_uploaded_file($imgTmp ,$upload_dir.$userPic);
-				}else{
-					$errorMsg = 'Image too large';
-				}
-			}else{
-				$errorMsg = 'Please select a valid image';
-			}
-		}else{
-
-			$userPic = $row['image'];
-		}
-
-		if(!isset($errorMsg)){
-			$sql = "update contacts
-									set name = '".$name."',
-										contact = '".$contact."',
-                    email = '".$email."',
-										image = '".$userPic."'
-					where id=".$id;
-			$result = mysqli_query($conn, $sql);
-			if($result){
-				$successMsg = 'New record updated successfully';
-				header('Location:index.php');
-			}else{
-				$errorMsg = 'Error '.mysqli_error($conn);
-			}
-		}
-
-	}
-
+  include('add.php')
 ?>
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -97,29 +32,24 @@
         <div class="row justify-content-center">
           <div class="col-md-6">
             <div class="card">
-              <div class="card-header">
-                Edit Profile
-              </div>
+              <div class="card-header">Create</div>
               <div class="card-body">
-                <form class="" action="" method="post" enctype="multipart/form-data">
+                <form class="" action="add.php" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                       <label for="name">Name</label>
-                      <input type="text" class="form-control" name="name"  placeholder="Enter Name" value="<?php echo $row['name']; ?>">
+                      <input type="text" class="form-control" name="name"  placeholder="Enter Name" value="">
                     </div>
                     <div class="form-group">
                       <label for="contact">Contact No:</label>
-                      <input type="text" class="form-control" name="contact" placeholder="Enter Mobile Number" value="<?php echo $row['contact']; ?>">
+                      <input type="text" class="form-control" name="contact" placeholder="Enter Mobile Number" value="">
                     </div>
                     <div class="form-group">
                       <label for="email">E-Mail</label>
-                      <input type="email" class="form-control" name="email" placeholder="Enter Email" value="<?php echo $row['email']; ?>">
+                      <input type="email" class="form-control" name="email" placeholder="Enter Email" value="">
                     </div>
                     <div class="form-group">
                       <label for="image">Choose Image</label>
-                      <div class="col-md-4">
-                        <img src="<?php echo $upload_dir.$row['image'] ?>" width="100">
-                        <input type="file" class="form-control" name="image" value="">
-                      </div>
+                      <input type="file" class="form-control" name="image" value="">
                     </div>
                     <div class="form-group">
                       <button type="submit" name="Submit" class="btn btn-primary waves">Submit</button>
@@ -130,6 +60,7 @@
           </div>
         </div>
       </div>
+
     <script src="js/bootstrap.min.js" charset="utf-8"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" charset="utf-8"></script>
   </body>
