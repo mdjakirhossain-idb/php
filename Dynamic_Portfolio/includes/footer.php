@@ -1,4 +1,4 @@
 
 <div class="credits">
-    Designed by : <a href="https://bootstrapmade.com/"> Abhishek Singh</a>
+    Designed by : <a href="https://bootstrapmade.com/"> MD Jakir Hossain</a>
 </div>
