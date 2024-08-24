@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2020 at 04:24 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.2
+-- Generation Time: Aug 24, 2024 at 11:44 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -38,7 +37,7 @@ CREATE TABLE `about_me` (
   `linkedin_link` varchar(100) NOT NULL,
   `github_link` varchar(100) NOT NULL,
   `photo` varchar(120) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `about_me`
@@ -60,7 +59,7 @@ CREATE TABLE `contact_information` (
   `address` varchar(200) NOT NULL,
   `phone` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `contact_information`
@@ -80,7 +79,7 @@ CREATE TABLE `education_informations` (
   `degree_name` varchar(100) NOT NULL,
   `year` int(5) NOT NULL,
   `progressbar` int(3) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `education_informations`
@@ -102,7 +101,7 @@ CREATE TABLE `guest_messages` (
   `email` varchar(80) NOT NULL,
   `message` text NOT NULL,
   `status` int(11) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `guest_messages`
@@ -126,7 +125,7 @@ INSERT INTO `guest_messages` (`id`, `name`, `email`, `message`, `status`) VALUES
 CREATE TABLE `logo` (
   `id` int(3) NOT NULL,
   `photo` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `logo`
@@ -151,7 +150,7 @@ CREATE TABLE `my_best_works` (
   `works_name` varchar(100) NOT NULL,
   `catagory` varchar(100) NOT NULL,
   `photo` varchar(110) NOT NULL DEFAULT 'default.jpg'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `my_best_works`
@@ -176,7 +175,7 @@ CREATE TABLE `services` (
   `icon` varchar(100) NOT NULL,
   `title` varchar(100) NOT NULL,
   `some_text` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `services`
@@ -199,7 +198,7 @@ CREATE TABLE `stastistics` (
   `active_products` int(11) NOT NULL,
   `experience` int(11) NOT NULL,
   `clients` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `stastistics`
@@ -220,7 +219,7 @@ CREATE TABLE `testimonials` (
   `customer_desegnation` varchar(100) NOT NULL,
   `customer_comment` text NOT NULL,
   `photo` varchar(100) NOT NULL DEFAULT 'default.png'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `testimonials`
@@ -244,16 +243,14 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `status` int(1) NOT NULL DEFAULT 1,
   `photo` varchar(100) NOT NULL DEFAULT 'default.png'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `fname`, `email`, `password`, `status`, `photo`) VALUES
-(1, 'Rakib', 'rakib@gmail.com', '$2y$10$Zp2gDrCQHUqca19wDY5fC.5CTJKycjnFsqUMDw8yGHe4zqFKvtvEe', 2, '1.jpg'),
-(2, 'Rakib', 'rakib1@gmail.com', '$2y$10$n7Q8pVBaawk42PDWW/9pheLKjxJ9UYoNP2Zb420.U1wHqLXDw3OSi', 2, 'default.png'),
-(3, 'Rakib', 'rakib2@gmail.com', '$2y$10$iEwGLYZ/kZd6pp97NaL7YeKIqrMCg59t9GYyttBQPcaciYk5eZLiu', 2, '3.png');
+(1, 'Md Jakir Hossain', 'jakir@gmail.com', '$2y$10$Zp2gDrCQHUqca19wDY5fC.5CTJKycjnFsqUMDw8yGHe4zqFKvtvEe', 2, '1.jpg');
 
 --
 -- Indexes for dumped tables
@@ -381,7 +378,7 @@ ALTER TABLE `testimonials`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
