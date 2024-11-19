@@ -1,12 +1,18 @@
 <?php 
+
 interface User{ 
     public function getName();
+   
+
+}
+interface roll{ 
+  
     public function info();
     public function desplay();
 
 }
 
-class wdpf implements User{ 
+class wdpf implements User,roll{ 
     public function getName(){ 
         echo "Done"."<br>";
     }
